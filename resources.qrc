@@ -7,9 +7,9 @@
         <file>images/arc.png</file>
         <file>images/token-.png</file>
         <file>images/token+.png</file>
-        <file>schemas/anyElement.xsd</file>
-        <file>schemas/conventions.xsd</file>
-        <file>schemas/pnmlcoremodel.xsd</file>
+        <file>schemas/anyElement.rng.xsd</file>
+        <file>schemas/conventions.rng.xsd</file>
+        <file>schemas/pnmlcoremodel.rng.xsd</file>
         <file>schemas/ptnet.xsd</file>
     </qresource>
 </RCC>
