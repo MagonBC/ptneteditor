@@ -126,7 +126,7 @@ void PTNscene::mouseDoubleClickEvent ( QGraphicsSceneMouseEvent * mouseEvent )
     if(mode != normalMode)
       return;
 
-    currentItem = itemAt(mouseEvent->scenePos());
+    currentItem = itemAt(mouseEvent->scenePos(), QTransform());
 
     if(!currentItem)
       return;
@@ -162,7 +162,7 @@ void PTNscene::mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         break;
        case drawArcMode:
 
-            currentItem = itemAt(mouseEvent->scenePos());
+           currentItem = itemAt(mouseEvent->scenePos(), QTransform());
             if(currentItem == 0)
                 return;
 
@@ -184,7 +184,7 @@ void PTNscene::mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         break;
        case normalMode:
 
-        currentItem = itemAt(mouseEvent->scenePos());
+        currentItem = itemAt(mouseEvent->scenePos(),QTransform());
 
         if((currentItem == 0)||(currentItem->type() == Arc::Type))
         {
@@ -197,14 +197,14 @@ void PTNscene::mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 
         break;
        case addToken:
-        currentItem = itemAt(mouseEvent->scenePos());
+        currentItem = itemAt(mouseEvent->scenePos(),QTransform());
         if(currentItem == 0)
             return;
         if(currentItem->type() == Place::Type)
             qgraphicsitem_cast<Place*>(currentItem)->updateTokens(1);
         break;
        case subToken:
-        currentItem = itemAt(mouseEvent->scenePos());
+        currentItem = itemAt(mouseEvent->scenePos(),QTransform());
         if(currentItem == 0)
             return;
         if(currentItem->type() == Place::Type)
@@ -212,7 +212,7 @@ void PTNscene::mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         break;
        case animationMode:
 
-        currentItem = itemAt(mouseEvent->scenePos());
+        currentItem = itemAt(mouseEvent->scenePos(),QTransform());
 
         if(currentItem == 0)
           return;
@@ -281,14 +281,14 @@ void PTNscene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 
     if((currentItem != 0)&&(!oldPos.isNull()))
     {
-        emit itemMoved (itemAt(mouseEvent->scenePos()), oldPos);
+        emit itemMoved (itemAt(mouseEvent->scenePos(),QTransform()), oldPos);
         oldPos = QPointF(0,0);
     }
 
-    if(((mode == drawArcMode)&&(pathitem != 0))&&(itemAt(mouseEvent->scenePos()) != 0))
+    if(((mode == drawArcMode)&&(pathitem != 0))&&(itemAt(mouseEvent->scenePos(),QTransform()) != 0))
      {
-       if ((itemAt(mouseEvent->scenePos())->type() == QGraphicsPathItem::Type )||
-           (itemAt(mouseEvent->scenePos()) == 0))
+       if ((itemAt(mouseEvent->scenePos(),QTransform())->type() == QGraphicsPathItem::Type )||
+           (itemAt(mouseEvent->scenePos(),QTransform()) == 0))
         {
             points << mouseEvent->scenePos();
             return;
@@ -302,8 +302,8 @@ void PTNscene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 
             points.clear();
 
-            QGraphicsItem * sourceItem = itemAt(path.pointAtPercent(0));
-            QGraphicsItem * targetItem = itemAt(mouseEvent->scenePos());
+            QGraphicsItem * sourceItem = itemAt(path.pointAtPercent(0),QTransform());
+            QGraphicsItem * targetItem = itemAt(mouseEvent->scenePos(),QTransform());
 
             if((sourceItem != 0) && (targetItem != 0))
             {
