@@ -1,0 +1,11 @@
+.idea
+.directory
+*~
+Makefile
+build/*
+schemas/*.xsd
+.qmake.stash
+.qtc_clangd/
+graph.dot
+ptnet.pro.user
+
